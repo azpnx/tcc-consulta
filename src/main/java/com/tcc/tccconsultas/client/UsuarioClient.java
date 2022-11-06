@@ -12,4 +12,7 @@ public interface UsuarioClient {
 
     @GetMapping("/findByTeacher")
     List<UsuarioResponse> findByProfessor(@RequestParam String professor);
+
+    @GetMapping("/allProfessionals")
+    List<UsuarioResponse> findAllProfessionals();
 }

@@ -23,8 +23,10 @@ public class ConsultasFacade {
     @Autowired
     private UsuarioService usuarioService;
 
-    public List<Consulta> findAllByProfessionalEmail(String professionalEmail){
-        return consultasService.findAllByProfessionalEmail(professionalEmail);
+    public List<ConsultaResponse> findAllByProfessionalEmail(String professionalEmail){
+        List<Consulta> consultas = consultasService.findAllByProfessionalEmail(professionalEmail);
+        List<UsuarioResponse> usuarios = usuarioService.findAllProfessionals();
+        return Mappers.getMapper(ConsultaMapper.class).toConsultasResponse(consultas, usuarios);
     }
 
     public List<ConsultaResponse> findAllByProfessor(String email){

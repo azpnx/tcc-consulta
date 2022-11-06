@@ -15,4 +15,8 @@ public class UsuarioService {
     public List<UsuarioResponse> findByProfessor(String email){
         return usuarioClient.findByProfessor(email);
     }
+
+    public List<UsuarioResponse> findAllProfessionals(){
+        return usuarioClient.findAllProfessionals();
+    }
 }

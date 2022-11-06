@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(name = "psi-user", url = "http://localhost:8383")
+@FeignClient(name = "psi-user", path = "")
 public interface UsuarioClient {
 
     @GetMapping("/findByTeacher")

@@ -19,4 +19,8 @@ public class UsuarioService {
     public List<UsuarioResponse> findAllProfessionals(){
         return usuarioClient.findAllProfessionals();
     }
+
+    public List<UsuarioResponse> getAll(){
+        return usuarioClient.getAll();
+    }
 }

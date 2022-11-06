@@ -25,7 +25,7 @@ public class ConsultasFacade {
 
     public List<ConsultaResponse> findAllByProfessionalEmail(String professionalEmail){
         List<Consulta> consultas = consultasService.findAllByProfessionalEmail(professionalEmail);
-        List<UsuarioResponse> usuarios = usuarioService.findAllProfessionals();
+        List<UsuarioResponse> usuarios = usuarioService.getAll();
         return Mappers.getMapper(ConsultaMapper.class).toConsultasResponse(consultas, usuarios);
     }
 

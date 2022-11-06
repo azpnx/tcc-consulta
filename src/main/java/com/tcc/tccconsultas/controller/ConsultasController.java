@@ -18,7 +18,7 @@ public class ConsultasController {
         return ResponseEntity.ok(consultasFacade.findAllByProfessionalEmail(professionalEmail));
     }
 
-    @GetMapping(value = "/user/{email}")
+    @GetMapping(value = "/teacher/{email}")
     public ResponseEntity<?> getAllByProfessor(@PathVariable("email") String email){
         return ResponseEntity.ok(consultasFacade.findAllByProfessor(email));
     }

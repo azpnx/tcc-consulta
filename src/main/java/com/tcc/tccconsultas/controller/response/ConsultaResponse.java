@@ -16,6 +16,8 @@ public class ConsultaResponse {
     private String userId;
     @JsonProperty("professional_id")
     private String email;
+    @JsonProperty("nome_paciente")
+    private String nomePaciente;
     @JsonProperty("session_date")
     private String sessionDate;
     @JsonProperty("meet_id")

@@ -3,6 +3,7 @@ package com.tcc.tccconsultas.mapper;
 import com.tcc.tccconsultas.controller.response.ConsultaResponse;
 import com.tcc.tccconsultas.model.Consulta;
 import com.tcc.tccconsultas.model.UsuarioResponse;
+import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -23,6 +24,9 @@ public interface ConsultaMapper {
         usuarioResponses.forEach(usuarioResponse -> usuarioHashMap.put(usuarioResponse.getEmail(), usuarioResponse));
 
         consultas.forEach(consulta -> consultaResponses.add(toConsultaResponse(consulta, usuarioHashMap.get(consulta.getEmail()))));
+        consultaResponses.forEach(consultaResponse ->
+                consultaResponse.setNomePaciente(usuarioHashMap.get(consultaResponse.getUserId()).getNome())
+                );
         return consultaResponses;
     }
 }

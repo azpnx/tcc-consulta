@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.tcc</groupId>
-    <artifactId>tcc-consultas</artifactId>
+    <artifactId>psi-consulta</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>tcc-consultas</name>
     <description>tcc-consultas</description>

@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: psi-consulta
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8671/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.uuid}}

@@ -17,15 +17,18 @@ public interface ConsultaMapper {
     @Mapping(target = "email", source = "consulta.email")
     ConsultaResponse toConsultaResponse(Consulta consulta, UsuarioResponse usuarioResponse);
 
-    default List<ConsultaResponse> toConsultasResponse(List<Consulta> consultas, List<UsuarioResponse> usuarioResponses){
+    default List<ConsultaResponse> toConsultasResponse(List<Consulta> consultas, List<UsuarioResponse> usuarioResponses, List<UsuarioResponse> pacientes){
         List<ConsultaResponse> consultaResponses = new ArrayList<>();
 
         HashMap<String, UsuarioResponse> usuarioHashMap = new HashMap<>();
         usuarioResponses.forEach(usuarioResponse -> usuarioHashMap.put(usuarioResponse.getEmail(), usuarioResponse));
 
+        HashMap<String, UsuarioResponse> pacientesHashMap = new HashMap<>();
+        pacientes.forEach(paciente -> pacientesHashMap.put(paciente.getEmail(), paciente));
+
         consultas.forEach(consulta -> consultaResponses.add(toConsultaResponse(consulta, usuarioHashMap.get(consulta.getEmail()))));
         consultaResponses.forEach(consultaResponse ->
-                consultaResponse.setNomePaciente(usuarioHashMap.get(consultaResponse.getUserId()).getNome())
+                consultaResponse.setNomePaciente(pacientesHashMap.get(consultaResponse.getUserId()).getNome())
                 );
         return consultaResponses;
     }

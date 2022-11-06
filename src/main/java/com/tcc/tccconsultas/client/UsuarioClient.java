@@ -16,6 +16,9 @@ public interface UsuarioClient {
     @GetMapping("/allProfessionals")
     List<UsuarioResponse> findAllProfessionals();
 
+    @GetMapping("/allPatients")
+    List<UsuarioResponse> getAllPatients();
+
     @GetMapping("/all")
     List<UsuarioResponse> getAll();
 }

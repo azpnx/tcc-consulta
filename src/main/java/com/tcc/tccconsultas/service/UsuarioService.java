@@ -20,6 +20,10 @@ public class UsuarioService {
         return usuarioClient.findAllProfessionals();
     }
 
+    public List<UsuarioResponse> getPacientes(){
+        return usuarioClient.getAllPatients();
+    }
+
     public List<UsuarioResponse> getAll(){
         return usuarioClient.getAll();
     }

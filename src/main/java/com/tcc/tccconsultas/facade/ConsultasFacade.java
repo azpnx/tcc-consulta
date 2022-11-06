@@ -25,13 +25,15 @@ public class ConsultasFacade {
 
     public List<ConsultaResponse> findAllByProfessionalEmail(String professionalEmail){
         List<Consulta> consultas = consultasService.findAllByProfessionalEmail(professionalEmail);
-        List<UsuarioResponse> usuarios = usuarioService.getAll();
-        return Mappers.getMapper(ConsultaMapper.class).toConsultasResponse(consultas, usuarios);
+        List<UsuarioResponse> usuarios = usuarioService.findAllProfessionals();
+        List<UsuarioResponse> pacientes = usuarioService.getPacientes();
+        return Mappers.getMapper(ConsultaMapper.class).toConsultasResponse(consultas, usuarios, pacientes);
     }
 
     public List<ConsultaResponse> findAllByProfessor(String email){
         List<Consulta> consultas = consultasService.findAll();
         List<UsuarioResponse> usuarios = usuarioService.findByProfessor(email);
-        return Mappers.getMapper(ConsultaMapper.class).toConsultasResponse(consultas, usuarios);
+        List<UsuarioResponse> pacientes = usuarioService.getPacientes();
+        return Mappers.getMapper(ConsultaMapper.class).toConsultasResponse(consultas, usuarios, pacientes);
     }
 }

@@ -29,11 +29,4 @@ public class ConsultasFacade {
         List<UsuarioResponse> pacientes = usuarioService.getPacientes();
         return Mappers.getMapper(ConsultaMapper.class).toConsultasResponse(consultas, usuarios, pacientes);
     }
-
-    public List<ConsultaResponse> findAllByProfessor(String email){
-        List<Consulta> consultas = consultasService.findAll();
-        List<UsuarioResponse> usuarios = usuarioService.findByProfessor(email);
-        List<UsuarioResponse> pacientes = usuarioService.getPacientes();
-        return Mappers.getMapper(ConsultaMapper.class).toConsultasResponse(consultas, usuarios, pacientes);
-    }
 }

@@ -18,12 +18,12 @@ public class ConsultasController {
         return ResponseEntity.ok(consultasFacade.findAllByProfessionalEmail(professionalEmail));
     }
 
-    @PostMapping(value = "/twilio/room")
+    @PostMapping(value = "/twilio/room/{nome}")
     public ResponseEntity<?> criaSala(@PathVariable("nome") String nomeSala){
         return ResponseEntity.ok(consultasFacade.criaSalaTwilioVideo(nomeSala));
     }
 
-    @PostMapping(value = "/twilio/token")
+    @PostMapping(value = "/twilio/token/{userId}")
     public ResponseEntity<?> criaSala(@PathVariable("userId") String userId ,@PathVariable("roomSid") String roomSid){
         return ResponseEntity.ok(consultasFacade.geraToken(userId, roomSid));
     }

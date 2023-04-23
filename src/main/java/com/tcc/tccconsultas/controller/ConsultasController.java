@@ -18,8 +18,13 @@ public class ConsultasController {
         return ResponseEntity.ok(consultasFacade.findAllByProfessionalEmail(professionalEmail));
     }
 
-    @GetMapping(value = "/teacher/{email}")
-    public ResponseEntity<?> getAllByProfessor(@PathVariable("email") String email){
-        return ResponseEntity.ok(consultasFacade.findAllByProfessor(email));
+    @PostMapping(value = "/twilio/room")
+    public ResponseEntity<?> criaSala(@PathVariable("nome") String nomeSala){
+        return ResponseEntity.ok(consultasFacade.criaSalaTwilioVideo(nomeSala));
+    }
+
+    @PostMapping(value = "/twilio/token")
+    public ResponseEntity<?> criaSala(@PathVariable("userId") String userId ,@PathVariable("roomSid") String roomSid){
+        return ResponseEntity.ok(consultasFacade.geraToken(userId, roomSid));
     }
 }

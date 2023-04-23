@@ -16,12 +16,10 @@ public class ConsultasService {
 
     public List<Consulta> findAllByProfessionalEmail(String professionalEmail){
         String[] email = professionalEmail.split("@");
-        List<Consulta> saida = consultasClient.findAllByProfessional(email[0], email[1]);
-        return saida;
+        return consultasClient.findAllByProfessional(email[0], email[1]);
     }
 
     public List<Consulta> findAll(){
-        List<Consulta> saida = consultasClient.findAll();
-        return saida;
+        return consultasClient.findAll();
     }
 }

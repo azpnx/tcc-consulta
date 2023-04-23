@@ -7,3 +7,8 @@ eureka:
       defaultZone: http://localhost:8671/eureka
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.uuid}}
+
+account-sid:
+auth_token:
+key_sid:
+key_secret:

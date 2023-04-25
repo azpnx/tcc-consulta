@@ -46,10 +46,10 @@ public class TwilioService {
         log.info("Sala criada com sucesso! RoomSid: " + room.getSid());
         log.info("Sala de texto criada com sucesso: chatSid: " + channel.getSid());
 
-        return new SalaResponse(room.getSid(), channel.getSid());
+        return new SalaResponse(room.getSid());
     }
 
-    public TokenResponse geraToken(String userId, String roomSid, String channelSid) {
+    public TokenResponse geraToken(String userId, String roomSid) {
 
         if (String.valueOf(userId).isEmpty()) throw new IllegalArgumentException("UserId está vazio!.");
 
@@ -64,17 +64,17 @@ public class TwilioService {
                 .build();
 
         log.info("Token criado com sucesso! " + accessToken.toJwt());
-        String chatToken = geraTokenTextChat(userId, channelSid);
+        String chatToken = geraTokenTextChat(userId, roomSid);
         return new TokenResponse(accessToken.toJwt(), chatToken);
     }
 
-    public String geraTokenTextChat(String userId, String channelSid) {
+    public String geraTokenTextChat(String userId, String roomSid) {
 
         if (String.valueOf(userId).isEmpty()) throw new IllegalArgumentException("UserId está vazio!.");
 
         final ChatGrant chatGrant = new ChatGrant();
         chatGrant.setServiceSid(SERVICE_ID);
-        chatGrant.setEndpointId(userId + "_" + channelSid);
+        chatGrant.setEndpointId(userId + "_" + roomSid);
 
         AccessToken accessToken = new AccessToken
                 .Builder(ACCOUNT_SID, KEY_SID, KEY_SECRET)

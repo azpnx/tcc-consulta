@@ -23,8 +23,8 @@ public class ConsultasController {
         return ResponseEntity.ok(consultasFacade.criaSalaTwilioVideo(nomeSala));
     }
 
-    @PostMapping(value = "/twilio/token/{userId}/{roomSid}")
-    public ResponseEntity<?> criaSala(@PathVariable("userId") String userId ,@PathVariable("roomSid") String roomSid){
-        return ResponseEntity.ok(consultasFacade.geraToken(userId, roomSid));
+    @PostMapping(value = "/twilio/token/{userId}/{roomSid}/{channelSid}")
+    public ResponseEntity<?> criaSala(@PathVariable("userId") String userId ,@PathVariable("roomSid") String roomSid, @PathVariable("channelSid") String channelSid){
+        return ResponseEntity.ok(consultasFacade.geraToken(userId, roomSid, channelSid));
     }
 }

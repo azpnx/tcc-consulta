@@ -1,6 +1,8 @@
 package com.tcc.tccconsultas.facade;
 
 import com.tcc.tccconsultas.controller.response.ConsultaResponse;
+import com.tcc.tccconsultas.controller.response.SalaResponse;
+import com.tcc.tccconsultas.controller.response.TokenResponse;
 import com.tcc.tccconsultas.mapper.ConsultaMapper;
 import com.tcc.tccconsultas.model.Consulta;
 import com.tcc.tccconsultas.model.UsuarioResponse;
@@ -10,6 +12,7 @@ import com.tcc.tccconsultas.service.UsuarioService;
 import lombok.NoArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -34,11 +37,11 @@ public class ConsultasFacade {
         return Mappers.getMapper(ConsultaMapper.class).toConsultasResponse(consultas, usuarios, pacientes);
     }
 
-    public String criaSalaTwilioVideo(String nomeSala){
+    public SalaResponse criaSalaTwilioVideo(String nomeSala){
         return twilioService.criaSala(nomeSala);
     }
 
-    public String geraToken(String userId, String roomSid){
-        return twilioService.geraToken(userId, roomSid);
+    public TokenResponse geraToken(String userId, String roomSid, String channelSid){
+        return twilioService.geraToken(userId, roomSid, channelSid);
     }
 }

@@ -7,10 +7,13 @@ import com.twilio.jwt.accesstoken.AccessToken;
 import com.twilio.jwt.accesstoken.ChatGrant;
 import com.twilio.jwt.accesstoken.VideoGrant;
 import com.twilio.rest.chat.v2.service.Channel;
+import com.twilio.rest.chat.v2.service.channel.Member;
 import com.twilio.rest.video.v1.Room;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -71,6 +74,10 @@ public class TwilioService {
     public String geraTokenTextChat(String userId, String channelSid) {
 
         if (String.valueOf(userId).isEmpty()) throw new IllegalArgumentException("UserId está vazio!.");
+
+//        Channel channel = Channel.fetcher(SERVICE_ID ,channelSid).fetch();
+        Member member = Member.creator(SERVICE_ID,channelSid, userId).create();
+
 
         final ChatGrant chatGrant = new ChatGrant();
         chatGrant.setServiceSid(SERVICE_ID);

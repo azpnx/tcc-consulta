@@ -3,6 +3,7 @@ package com.tcc.tccconsultas.service;
 import com.tcc.tccconsultas.controller.response.SalaResponse;
 import com.tcc.tccconsultas.controller.response.TokenResponse;
 import com.twilio.Twilio;
+import com.twilio.base.ResourceSet;
 import com.twilio.jwt.accesstoken.AccessToken;
 import com.twilio.jwt.accesstoken.ChatGrant;
 import com.twilio.jwt.accesstoken.VideoGrant;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Slf4j
@@ -70,12 +72,36 @@ public class TwilioService {
         Room room = Room.fetcher(roomSid).fetch();
 
         com.twilio.rest.chat.v2.Service service = com.twilio.rest.chat.v2.Service.fetcher(SERVICE_ID).fetch();
-        Channel channel = Channel.creator(service.getSid())
-                .setFriendlyName(room.getSid())
-                .setUniqueName(room.getUniqueName())
-                .create();
+        ResourceSet<Channel> channels = Channel.reader(SERVICE_ID).read();
+        Channel channel = null;
 
-        Member member = Member.creator(SERVICE_ID,channel.getSid(), userId).create();
+        for (Channel c : channels) {
+            if (c.getUniqueName().equalsIgnoreCase(room.getUniqueName())) {
+                channel = c;
+                break;
+            }
+        }
+
+        if (Objects.isNull(channel)){
+            channel = Channel.creator(service.getSid())
+                    .setFriendlyName(room.getSid())
+                    .setUniqueName(room.getUniqueName())
+                    .create();
+        }
+
+        ResourceSet<Member> members = Member.reader(SERVICE_ID, channel.getSid()).read();
+        Member existingMember = null;
+        for (Member m : members) {
+            if (m.getIdentity().equals(userId)) {
+                existingMember = m;
+                break;
+            }
+        }
+
+        if (Objects.isNull(existingMember)){
+            Member member = Member.creator(SERVICE_ID,channel.getSid(), userId).create();
+        }
+
         log.info("Sala de texto criada com sucesso: chatSid: " + channel.getSid());
 
         final ChatGrant chatGrant = new ChatGrant();

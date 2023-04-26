@@ -40,7 +40,7 @@ public class TwilioService {
         com.twilio.rest.chat.v2.Service service = com.twilio.rest.chat.v2.Service.fetcher(SERVICE_ID).fetch();
         Channel channel = Channel.creator(service.getSid())
                 .setFriendlyName(room.getSid())
-                .setType(Channel.ChannelType.PRIVATE)
+                .setUniqueName(nomeSala)
                 .create();
 
         log.info("Sala criada com sucesso! RoomSid: " + room.getSid());

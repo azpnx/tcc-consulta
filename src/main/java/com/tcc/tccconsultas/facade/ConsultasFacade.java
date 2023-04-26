@@ -41,7 +41,7 @@ public class ConsultasFacade {
         return twilioService.criaSala(nomeSala);
     }
 
-    public TokenResponse geraToken(String userId, String roomSid, String channelSid){
-        return twilioService.geraToken(userId, roomSid, channelSid);
+    public TokenResponse geraToken(String userId, String roomSid){
+        return twilioService.geraToken(userId, roomSid);
     }
 }

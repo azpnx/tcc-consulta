@@ -74,10 +74,12 @@ public class TwilioService {
         ResourceSet<Channel> channels = Channel.reader(SERVICE_ID).read();
         Channel channel = null;
 
-        for (Channel c : channels) {
-            if (c.getUniqueName().equalsIgnoreCase(room.getUniqueName())) {
-                channel = c;
-                break;
+        if (channels != null){
+            for (Channel c : channels) {
+                if (c.getUniqueName().equalsIgnoreCase(room.getUniqueName())) {
+                    channel = c;
+                    break;
+                }
             }
         }
 

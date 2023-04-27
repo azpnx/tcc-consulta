@@ -66,6 +66,7 @@ public class TwilioService {
     }
 
     public String geraTokenTextChat(String userId, String roomSid) {
+        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 
         if (String.valueOf(userId).isEmpty()) throw new IllegalArgumentException("UserId está vazio!.");
         Room room = Room.fetcher(roomSid).fetch();
@@ -76,7 +77,7 @@ public class TwilioService {
 
         if (channels != null){
             for (Channel c : channels) {
-                if (c.getUniqueName().equalsIgnoreCase(room.getUniqueName())) {
+                if (Objects.nonNull(c.getUniqueName()) && c.getUniqueName().equalsIgnoreCase(room.getUniqueName())) {
                     channel = c;
                     break;
                 }

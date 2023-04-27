@@ -14,7 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -87,6 +86,7 @@ public class TwilioService {
                     .setFriendlyName(room.getSid())
                     .setUniqueName(room.getUniqueName())
                     .create();
+            log.info("Sala de texto criada com sucesso: chatSid: " + channel.getSid());
         }
 
         ResourceSet<Member> members = Member.reader(SERVICE_ID, channel.getSid()).read();
@@ -101,8 +101,6 @@ public class TwilioService {
         if (Objects.isNull(existingMember)){
             Member member = Member.creator(SERVICE_ID,channel.getSid(), userId).create();
         }
-
-        log.info("Sala de texto criada com sucesso: chatSid: " + channel.getSid());
 
         final ChatGrant chatGrant = new ChatGrant();
         chatGrant.setServiceSid(SERVICE_ID);

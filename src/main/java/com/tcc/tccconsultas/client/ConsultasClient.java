@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(name = "consultas", url = "http://tcc-app-session-schedule.herokuapp.com/v1/")
+@FeignClient(name = "consultas", url = "http://35.247.228.233:8050/v1/")
 public interface ConsultasClient {
 
     @GetMapping("/session/professional/{email}@{provedor}")
